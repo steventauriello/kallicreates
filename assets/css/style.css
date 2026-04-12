@@ -502,3 +502,128 @@ a{
     grid-template-columns:1fr;
   }
 }
+/* =========================
+   CART FEEDBACK
+========================= */
+
+.add-to-cart-btn.is-added{
+  transform:scale(0.98);
+  background:#1a1a1a;
+}
+
+.add-to-cart-btn.is-added::after{
+  content:" ✓";
+}
+
+.cart-count-pop{
+  animation:cartCountPop .28s ease;
+}
+
+@keyframes cartCountPop{
+  0%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.25);
+  }
+  100%{
+    transform:scale(1);
+  }
+}
+/* =========================
+   CART PAGE
+========================= */
+
+.cart-items{
+  display:grid;
+  gap:1rem;
+  margin-bottom:2rem;
+}
+
+.cart-item{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  gap:1rem;
+  align-items:start;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:1rem;
+  box-shadow:0 6px 22px rgba(0,0,0,.04);
+}
+
+.cart-item-image{
+  border-radius:12px;
+  aspect-ratio:4 / 5;
+  object-fit:cover;
+}
+
+.cart-item-title{
+  margin:0;
+  font-weight:700;
+  font-size:1.1rem;
+}
+
+.cart-item-artist{
+  margin:.2rem 0 0;
+  color:var(--muted);
+}
+
+.cart-item-price{
+  margin:.65rem 0;
+  font-weight:700;
+}
+
+.cart-item-actions{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:.5rem;
+}
+
+.cart-qty-btn,
+.cart-remove-btn{
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--text);
+  border-radius:999px;
+  padding:.45rem .8rem;
+  cursor:pointer;
+  font:inherit;
+}
+
+.cart-item-qty{
+  min-width:24px;
+  text-align:center;
+  font-weight:700;
+}
+
+.cart-summary{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:1.5rem;
+  box-shadow:0 8px 24px rgba(0,0,0,.04);
+}
+
+.cart-total-label{
+  margin:0 0 .35rem;
+  color:var(--muted);
+}
+
+.cart-total-value{
+  margin:0 0 1rem;
+  font-family:"Cormorant Garamond", serif;
+  font-size:2rem;
+  font-weight:700;
+}
+
+.cart-checkout-button{
+  width:auto;
+}
+
+@media (max-width: 720px){
+  .cart-item{
+    grid-template-columns:1fr;
+  }
+}

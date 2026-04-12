@@ -98,8 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   checkoutButton.addEventListener("click", function () {
-    alert("Checkout wiring is the next step. Cart is working, but payment is not connected yet.");
-  });
+  console.log("Proceed to checkout clicked.");
+});
 
   renderCart();
 });
