@@ -16,11 +16,11 @@ exports.handler = async (event) => {
     const cart = Array.isArray(parsed.cart) ? parsed.cart : [];
 
     const PRODUCT_CATALOG = {
-      "original-art-001": {
-        name: "Original Artwork",
-        price: 12500,
-      },
-    };
+  "ocean-breeze": {
+    name: "Ocean Breeze",
+    price: 12500,
+  }
+};
 
     if (!cart.length) {
       return {
