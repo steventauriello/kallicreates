@@ -15,9 +15,11 @@
     const storedCart = getCart();
 
     const cart = storedCart.map((item) => ({
-      id: item.id,
-      qty: Number(item.quantity || 1)
-    }));
+  id: item.id,
+  title: item.title,
+  price: item.price,
+  qty: Number(item.quantity || 1)
+}));
 
     if (!cart.length) {
       alert("Your cart is empty.");
