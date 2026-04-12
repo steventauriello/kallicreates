@@ -19,12 +19,13 @@
   <img src="assets/images/logo/kalli-creates-logo.png" alt="Kalli Creates logo">
 </a>
       <nav class="site-nav" aria-label="Main navigation">
-        <a href="index.html">Home</a>
-        <a href="gallery.html" class="active">Gallery</a>
-        <a href="about.html">About</a>
-        <a href="featured-artists.html">Featured Artists</a>
-        <a href="contact.html">Contact</a>
-      </nav>
+  <a href="index.html">Home</a>
+  <a href="gallery.html" class="active">Gallery</a>
+  <a href="about.html">About</a>
+  <a href="featured-artists.html">Featured Artists</a>
+  <a href="contact.html">Contact</a>
+  <a href="cart.html">Cart (<span data-cart-count>0</span>)</a>
+</nav>
     </div>
   </header>
 
@@ -58,7 +59,16 @@
     <p class="gallery-art-title">Ocean Breeze</p>
     <p class="gallery-art-artist">Kalli Tauriello</p>
     <p class="gallery-art-price">$85.00</p>
-    <button class="btn btn-primary gallery-art-button" type="button">Add to Cart</button>
+    <button
+      class="btn btn-primary gallery-art-button add-to-cart-btn"
+      type="button"
+      data-id="ocean-breeze"
+      data-title="Ocean Breeze"
+      data-artist="Kalli Tauriello"
+      data-price="85.00"
+      data-image="assets/images/artwork/ocean-breeze.jpg">
+      Add to Cart
+    </button>
   </div>
 </div>
           <div class="art-card placeholder-card"><div class="placeholder-inner">Artwork Coming Soon</div></div>
@@ -83,6 +93,7 @@
       </div>
     </div>
   </footer>
+<script src="assets/js/cart.js"></script>
 
 </body>
 </html>
