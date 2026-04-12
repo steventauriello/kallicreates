@@ -315,20 +315,26 @@ a{
 @media (max-width: 720px){
 
   .header-inner{
-    flex-direction:column;
-    justify-content:center;
-    padding:.85rem 0;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-between;
+    padding:.65rem 0;
     min-height:64px;
+    gap:.75rem;
   }
 
   .site-nav{
     flex-wrap:wrap;
-    justify-content:center;
-    gap:.85rem 1rem;
+    justify-content:flex-end;
+    gap:.5rem .75rem;
+  }
+
+  .site-nav a{
+    font-size:.9rem;
   }
 
   .brand img{
-    height:48px;
+    height:42px;
   }
 
   .art-grid{
