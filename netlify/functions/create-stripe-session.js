@@ -17,9 +17,9 @@ exports.handler = async (event) => {
 
     const PRODUCT_CATALOG = {
   "ocean-breeze": {
-    name: "Ocean Breeze",
-    price: 12500,
-  }
+  name: "Ocean Breeze",
+  price: 8500,
+}
 };
 
     if (!cart.length) {
