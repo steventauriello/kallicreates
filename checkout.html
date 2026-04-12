@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Checkout | Kalli Creates</title>
+
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #fafafa;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .checkout-box {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      margin-bottom: 1rem;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .stripe {
+      background: black;
+      color: white;
+    }
+
+    .paypal {
+      background: #ffc439;
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="checkout-box">
+    <h1>Checkout</h1>
+
+    <p>Your order is ready</p>
+
+    <button id="stripeCheckoutBtn" class="btn stripe">
+      Pay with Card
+    </button>
+
+    <button class="btn paypal">
+      Pay with PayPal (coming soon)
+    </button>
+  </div>
+
+  <script>
+    async function startStripeCheckout() {
+      const cart = [
+        {
+          id: "original-art-001",
+          qty: 1
+        }
+      ];
+
+      try {
+        const response = await fetch("/.netlify/functions/create-stripe-session", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ cart })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.url) {
+          throw new Error(data.error || "Checkout failed");
+        }
+
+        window.location.href = data.url;
+
+      } catch (err) {
+        console.error(err);
+        alert(err.message);
+      }
+    }
+
+    document.getElementById("stripeCheckoutBtn")
+      .addEventListener("click", startStripeCheckout);
+  </script>
+
+</body>
+</html>
