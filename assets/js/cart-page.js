@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   checkoutButton.addEventListener("click", function () {
-  console.log("Proceed to checkout clicked.");
+  window.location.href = "checkout.html";
 });
 
   renderCart();
