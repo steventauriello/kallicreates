@@ -220,10 +220,10 @@ a{
 }
 
 .art-card img{
-  aspect-ratio:1 / 1.12;
-  object-fit:cover;
+  width:100%;
+  height:auto;
+  object-fit:contain;
 }
-
 .section-cta{
   margin-top:1.4rem;
 }
@@ -446,7 +446,51 @@ a{
   margin:0;
   color:var(--muted);
 }
+/* =========================
+   GALLERY PRODUCT CARDS
+========================= */
 
+.gallery-art-image-link{
+  display:block;
+  overflow:hidden;
+}
+
+.gallery-art-card img{
+  width:100%;
+  aspect-ratio:4 / 5;
+  object-fit:contain;
+  background:var(--surface);
+  transition:transform .35s ease;
+  transform-origin:center center;
+}
+.gallery-art-card:hover img{
+  transform:scale(1.12);
+}
+
+.gallery-art-meta{
+  padding:.85rem;
+}
+
+.gallery-art-title{
+  margin:0;
+  font-weight:700;
+  font-size:1.05rem;
+}
+
+.gallery-art-artist{
+  margin:.2rem 0 0;
+  color:var(--muted);
+  font-size:.95rem;
+}
+
+.gallery-art-price{
+  margin:.65rem 0 .9rem;
+  font-weight:700;
+}
+
+.gallery-art-button{
+  width:100%;
+}
 @media (max-width: 980px){
   .two-col,
   .artist-grid{
