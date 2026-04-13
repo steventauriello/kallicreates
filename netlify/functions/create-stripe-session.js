@@ -36,7 +36,7 @@ exports.handler = async (event) => {
       line_items,
       allow_promotion_codes: true,
       success_url: "https://kallicreates.netlify.app/success.html",
-      cancel_url: "https://kallicreates.netlify.app/checkout.html",
+cancel_url: "https://kallicreates.netlify.app/cart.html",
     });
 
     return {
