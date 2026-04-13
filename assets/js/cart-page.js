@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const cartItemsContainer = document.getElementById("cart-items");
   const cartTotalEl = document.getElementById("cart-total");
-  const checkoutButton = document.getElementById("checkout-button");
+  const stripeCheckoutButton = document.getElementById("stripe-checkout-button");
 
   if (!window.KalliCreatesCart) {
     return;
@@ -20,6 +20,48 @@ document.addEventListener("DOMContentLoaded", function () {
     window.KalliCreatesCart.updateCartCount();
   }
 
+  async function startStripeCheckout() {
+    const storedCart = getCart();
+
+    const cart = storedCart.map((item) => ({
+      id: item.id,
+      title: item.title,
+      price: Number(item.price),
+      qty: Number(item.quantity || 1)
+    }));
+
+    if (!cart.length) {
+      alert("Your cart is empty.");
+      return;
+    }
+
+    try {
+      const response = await fetch("/.netlify/functions/create-stripe-session", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ cart })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.url) {
+        throw new Error(data.error || "Checkout failed");
+      }
+
+      window.location.href = data.url;
+    } catch (err) {
+      console.error(err);
+      alert(err.message || "Checkout failed");
+    }
+  }
+
+  function updateCheckoutState(cart) {
+    if (!stripeCheckoutButton) return;
+    stripeCheckoutButton.disabled = cart.length === 0;
+  }
+
   function renderCart() {
     const cart = getCart();
 
@@ -30,6 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
       `;
       cartTotalEl.textContent = "$0.00";
+      updateCheckoutState(cart);
       return;
     }
 
@@ -58,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }).join("");
 
     cartTotalEl.textContent = formatPrice(total);
+    updateCheckoutState(cart);
     bindCartActions();
   }
 
@@ -97,9 +141,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  checkoutButton.addEventListener("click", function () {
-  window.location.href = "checkout.html";
-});
+  if (stripeCheckoutButton) {
+    stripeCheckoutButton.addEventListener("click", startStripeCheckout);
+  }
 
   renderCart();
 });

@@ -44,12 +44,19 @@
         <div id="cart-items" class="cart-items"></div>
 
         <div class="cart-summary">
-          <p class="cart-total-label">Total</p>
-          <p class="cart-total-value" id="cart-total">$0.00</p>
-          <button class="btn btn-primary cart-checkout-button" type="button" id="checkout-button">
-            Proceed to Checkout
-          </button>
-        </div>
+  <p class="cart-total-label">Total</p>
+  <p class="cart-total-value" id="cart-total">$0.00</p>
+
+  <button class="btn btn-primary cart-checkout-button" type="button" id="stripe-checkout-button">
+    Secure Checkout with Card
+  </button>
+
+  <div id="paypal-button-container" class="paypal-button-container"></div>
+
+  <p class="cart-checkout-note">
+    Secure payment powered by Stripe and PayPal.
+  </p>
+</div>
       </div>
     </section>
   </main>
