@@ -627,3 +627,48 @@ a{
     grid-template-columns:1fr;
   }
 }
+.zoom-container {
+  position: relative;
+  overflow: hidden;
+  cursor: zoom-in;
+  border-radius: 12px;
+}
+
+.zoom-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 0.15s ease;
+  transform-origin: center center;
+}
+.zoom-lens {
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.12),
+    0 10px 25px rgba(0, 0, 0, 0.18);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(1px);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.12s ease;
+  z-index: 2;
+}
+
+.zoom-container.is-active .zoom-lens {
+  opacity: 1;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .zoom-container {
+    cursor: default;
+  }
+
+  .zoom-lens {
+    display: none;
+  }
+}

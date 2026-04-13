@@ -53,8 +53,15 @@
         <div class="art-grid">
           <div class="art-card gallery-art-card">
   <a href="artists/kalli.html" class="gallery-art-image-link">
-    <img src="assets/images/artwork/ocean-breeze.jpg" alt="Ocean Breeze by Kalli Tauriello" />
-  </a>
+  <div class="zoom-container">
+    <img
+      src="assets/images/artwork/ocean-breeze.jpg"
+      alt="Ocean Breeze by Kalli Tauriello"
+      class="zoom-image"
+    />
+    <div class="zoom-lens" aria-hidden="true"></div>
+  </div>
+</a>
   <div class="gallery-art-meta">
     <p class="gallery-art-title">Ocean Breeze</p>
     <p class="gallery-art-artist">Kalli Tauriello</p>
@@ -71,7 +78,33 @@
     </button>
   </div>
 </div>
-          <div class="art-card placeholder-card"><div class="placeholder-inner">Artwork Coming Soon</div></div>
+          <div class="art-card gallery-art-card">
+  <a href="artists/kalli.html" class="gallery-art-image-link">
+  <div class="zoom-container">
+    <img
+      src="assets/images/artwork/pink-flowers.jpg"
+      alt="Pink Flowers by Kalli Tauriello"
+      class="zoom-image"
+    />
+    <div class="zoom-lens" aria-hidden="true"></div>
+  </div>
+</a>
+  <div class="gallery-art-meta">
+    <p class="gallery-art-title">Pink Flowers</p>
+    <p class="gallery-art-artist">Kalli Tauriello</p>
+    <p class="gallery-art-price">$85.00</p>
+    <button
+      class="btn btn-primary gallery-art-button add-to-cart-btn"
+      type="button"
+      data-id="pink-flowers"
+      data-title="Pink Flowers"
+      data-artist="Kalli Tauriello"
+      data-price="85.00"
+      data-image="assets/images/artwork/pink-flowers.jpg">
+      Add to Cart
+    </button>
+  </div>
+</div>
           <div class="art-card placeholder-card"><div class="placeholder-inner">Artwork Coming Soon</div></div>
           <div class="art-card placeholder-card"><div class="placeholder-inner">Artwork Coming Soon</div></div>
         </div>
@@ -94,6 +127,7 @@
     </div>
   </footer>
 <script src="assets/js/cart.js"></script>
+<script src="assets/js/gallery.js"></script>
 
 </body>
 </html>
