@@ -58,9 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updateCheckoutState(cart) {
-    if (!stripeCheckoutButton) return;
+  if (stripeCheckoutButton) {
     stripeCheckoutButton.disabled = cart.length === 0;
   }
+
+  const paypalContainer = document.getElementById("paypal-button-container");
+  if (paypalContainer) {
+    paypalContainer.style.display = cart.length === 0 ? "none" : "block";
+  }
+}
 
   function renderCart() {
     const cart = getCart();
@@ -122,13 +128,15 @@ document.addEventListener("DOMContentLoaded", function () {
           if (item.quantity <= 0) {
             const updated = cart.filter((entry) => entry.id !== item.id);
             saveCart(updated);
-            renderCart();
-            return;
+renderCart();
+initPayPal();
+return;
           }
         }
 
         saveCart(cart);
-        renderCart();
+renderCart();
+initPayPal();
       });
     });
 
@@ -136,14 +144,77 @@ document.addEventListener("DOMContentLoaded", function () {
       button.addEventListener("click", function () {
         const cart = getCart().filter((item) => item.id !== this.dataset.id);
         saveCart(cart);
-        renderCart();
+renderCart();
+initPayPal();
       });
     });
   }
+function initPayPal() {
+  const paypalContainer = document.getElementById("paypal-button-container");
 
+  if (!paypalContainer || !window.paypal) {
+    return;
+  }
+
+  paypalContainer.innerHTML = "";
+
+  paypal.Buttons({
+    createOrder: async () => {
+      const storedCart = getCart();
+
+      const cart = storedCart.map((item) => ({
+        id: item.id,
+        title: item.title,
+        price: Number(item.price),
+        qty: Number(item.quantity || 1)
+      }));
+
+      if (!cart.length) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      const response = await fetch("/.netlify/functions/create-paypal-order", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ cart })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok || !data.id) {
+        throw new Error(data.error || "PayPal checkout failed");
+      }
+
+      return data.id;
+    },
+
+    onApprove: async (data, actions) => {
+      try {
+        const details = await actions.order.capture();
+        console.log("PayPal capture successful:", details);
+
+        saveCart([]);
+        renderCart();
+        window.location.href = "/success.html";
+      } catch (err) {
+        console.error(err);
+        alert("PayPal payment capture failed.");
+      }
+    },
+
+    onError: (err) => {
+      console.error(err);
+      alert("PayPal checkout failed.");
+    }
+  }).render("#paypal-button-container");
+}
   if (stripeCheckoutButton) {
     stripeCheckoutButton.addEventListener("click", startStripeCheckout);
   }
 
   renderCart();
+initPayPal();
 });
