@@ -159,6 +159,15 @@ function initPayPal() {
   paypalContainer.innerHTML = "";
 
   paypal.Buttons({
+  style: {
+    layout: "vertical",
+    shape: "pill",
+    height: 48,
+    color: "gold",
+    label: "paypal",
+    tagline: false
+  },
+  disableFunding: ["paylater", "card"],
     createOrder: async () => {
       const storedCart = getCart();
 
